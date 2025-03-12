@@ -1,0 +1,48 @@
+services:
+  webui:
+    image: ghcr.io/open-webui/open-webui:v0.5.18
+    ports:
+       - 8003:8080/tcp
+    environment:
+       - OLLAMA_BASE_URL=http://ollama:11434
+    volumes:
+       - webui:/app/backend/data
+    depends_on:
+       - ollama
+    restart:
+      unless-stopped
+
+  ollama:
+    image: ollama/ollama:0.5.13
+#    image: ollama/ollama:0.6.0-rocm
+    environment:
+#      HSA_OVERRIDE_GFX_VERSION: 11.0.0
+      AMD_SERIALIZE_KERNEL: 3
+      HIP_VISIBLE_DEVICES: 0
+      OLLAMA_DEBUG: 1
+        #      AMD_LOG_LEVEL: 3
+#      rx6700xt
+      HSA_OVERRIDE_GFX_VERSION: 10.3.0
+#      rx9070xt
+#      HSA_OVERRIDE_GFX_VERSION: 12.0.1
+
+#     AMD_SERIALIZE_KERNEL: 4
+    security_opt:
+      - seccomp:unconfined
+    cap_add:
+      - SYS_PTRACE
+    ipc: host
+    group_add:
+      - video
+    ports:
+      - 11434:11434/tcp
+    volumes:
+      - ollama:/root/.ollama
+    devices:
+      - /dev/kfd:/dev/kfd
+      - /dev/dri:/dev/dri
+    restart:
+      unless-stopped
+volumes:
+  ollama:
+  webui:
