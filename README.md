@@ -12,16 +12,31 @@
       HSA_OVERRIDE_GFX_VERSION: 10.3.0
 #     AMD_SERIALIZE_KERNEL: 4
 ```
-* Start:
+
+## Start:
 ```
 docker-compose up -d
 ```
-* Stop:
+## Stop:
 ```
 docker-compose down
 ```
 
-* Misc:
+## Misc:
 ```
 docker logs -f ai-ollama-1
 ```
+
+## Access:
+* GPT-like WEB UI: http://localhost:8003
+* ollama directly: http://localhost:11434/api/generate
+* bash script: ./prompt.sh
+
+
+## LLMs:
+* https://huggingface.co/
+* https://ollama.com/library
+
+
+### Author
+* Mihai Vultur
