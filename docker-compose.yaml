@@ -1,6 +1,6 @@
 services:
   webui:
-    image: ghcr.io/open-webui/open-webui:v0.5.18
+    image: ghcr.io/open-webui/open-webui:v0.5.20
     ports:
        - 8003:8080/tcp
     environment:
